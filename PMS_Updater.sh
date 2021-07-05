@@ -213,6 +213,7 @@ if [ -d "${PMSPARENTPATH}/plexmediaserver-plexpass" ]; then {
 
 
 export PYTHONHOME="$PMSPARENTPATH/$PMSLIVEFOLDER/Resources/Python"
+export PYTHONPATH="$PYTHONHOME/python27.zip"
 
 # Get the current version
 CURRENTVER=`export LD_LIBRARY_PATH=$PMSPARENTPATH/$PMSLIVEFOLDER/lib; $PMSPARENTPATH/$PMSLIVEFOLDER/Plex\ Media\ Server --version`
