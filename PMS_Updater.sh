@@ -8,7 +8,7 @@ LOGGING=1
 
 PLEXTOKEN="$(sed -n 's/.*PlexOnlineToken="//p' /Plex\ Media\ Server/Preferences.xml | sed 's/\".*//')"
 BASEURL="https://plex.tv/api/downloads/5.json"
-TOKENURL="$BASEURL?channel=plexpass&X-Plex-Token=$PLEXTOKEN"
+TOKENURL="$BASEURL?channel=plexpass&X-Plex-Token=$PLEXTOKE"
 DOWNLOADPATH="/tmp"
 LOGPATH="/tmp"
 LOGFILE="PMS_Updater.log"
@@ -132,7 +132,7 @@ findLatest()
     if [ $VERBOSE = 1 ]; then echo Using URL $BASEURL; fi
 
     echo Searching $BASEURL for the FreeBSD download URL ..... | LogMsg -n
-    DOWNLOADURL="$(fetch -q $TOKENURL -o- | $PMSPARENTPATH/$PMSLIVEFOLDER/Plex\ Script\ Host -c 'import sys, json; myobj = json.load(sys.stdin); print(myobj["computer"]["FreeBSD"]["releases"][0]["url"]);')"
+    DOWNLOADURL="$(fetch -q $BASEURL -o- | $PMSPARENTPATH/$PMSLIVEFOLDER/Plex\ Script\ Host -c 'import sys, json; myobj = json.load(sys.stdin); print(myobj["computer"]["FreeBSD"]["releases"][0]["url"]);')"
 
     if [ "x$DOWNLOADURL" = "x" ]; then {
         # DOWNLOADURL is zero length, i.e. nothing matched PMSPATTERN. Error and exit
